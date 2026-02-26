@@ -15,6 +15,7 @@ class _FormPageState extends State<FormPage> {
   final hargaController = TextEditingController();
   final tahunController = TextEditingController();
   final gambarController = TextEditingController();
+  final spesifikasiController = TextEditingController();
 
   @override
   void initState() {
@@ -24,14 +25,26 @@ class _FormPageState extends State<FormPage> {
       hargaController.text = widget.katalog!.harga;
       tahunController.text = widget.katalog!.tahun;
       gambarController.text = widget.katalog!.gambar;
+      spesifikasiController.text = widget.katalog!.spesifikasi;
     }
+  }
+
+  @override
+  void dispose() {
+    namaController.dispose();
+    hargaController.dispose();
+    tahunController.dispose();
+    gambarController.dispose();
+    spesifikasiController.dispose();
+    super.dispose();
   }
 
   void saveData() {
     if (namaController.text.isEmpty ||
         hargaController.text.isEmpty ||
         tahunController.text.isEmpty ||
-        gambarController.text.isEmpty) {
+        gambarController.text.isEmpty ||
+        spesifikasiController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Semua field wajib diisi')),
       );
@@ -43,6 +56,7 @@ class _FormPageState extends State<FormPage> {
       harga: hargaController.text,
       tahun: tahunController.text,
       gambar: gambarController.text,
+      spesifikasi: spesifikasiController.text,
     );
 
     Navigator.pop(context, katalog);
@@ -102,7 +116,16 @@ class _FormPageState extends State<FormPage> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
+            TextField(
+              controller: spesifikasiController,
+              keyboardType: TextInputType.multiline,
+              maxLines: 4,
+              decoration: const InputDecoration(
+                labelText: 'Spesifikasi',
+                border: OutlineInputBorder(),
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: saveData,
