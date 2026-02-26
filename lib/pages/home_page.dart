@@ -84,7 +84,18 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.cover,
                     ),
                     title: Text(item.nama),
-                    subtitle: Text('Rp ${item.harga} • ${item.tahun}'),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Rp ${item.harga} • ${item.tahun}'),
+                        const SizedBox(height: 20),
+                        Text(
+                          item.spesifikasi,
+                          style: const TextStyle(color: Colors.black87),
+                        ),
+                      ],
+                    ),
+                    isThreeLine: true,
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
