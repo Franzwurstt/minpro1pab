@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Katalog Samsung',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.red),
       home: const HomePage(),
     );
   }
